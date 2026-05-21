@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>ИсточникДанных1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>ДенежныеОперацииЗаПериод</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ИзменениеОстатка</dataPath>
+			<field>ИзменениеОстатка</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Изменение остатка</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>МестоХранения</dataPath>
+			<field>МестоХранения</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Место хранения</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ДатаОтбора</dataPath>
+			<field>ДатаОтбора</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Дата отбора</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:periodNumber>3</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Дата</dataPath>
+			<field>Дата</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Дата</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:periodNumber>2</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Документ</dataPath>
+			<field>Документ</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:periodNumber>1</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ВидДвижения</dataPath>
+			<field>ВидДвижения</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Приход</dataPath>
+			<field>Приход</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Приход</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Расход</dataPath>
+			<field>Расход</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Расход</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>СпособОплатыОтбор</dataPath>
+			<field>СпособОплатыОтбор</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Способ оплаты отбор</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<dataSource>ИсточникДанных1</dataSource>
+		<query>ВЫБРАТЬ
+    НАЧАЛОПЕРИОДА(Наличные.Период, ДЕНЬ) КАК ДатаОтбора,
+    Наличные.Период КАК Дата,
+    Наличные.Регистратор КАК Документ,
+    ЗНАЧЕНИЕ(Перечисление.СпособОплаты.Наличная) КАК СпособОплатыОтбор,
+    ПРЕДСТАВЛЕНИЕ(ЗНАЧЕНИЕ(Перечисление.СпособОплаты.Наличная)) КАК ВидСредств,
+    ПРЕДСТАВЛЕНИЕ(Наличные.Касса) КАК МестоХранения,
+    Наличные.ВидДвижения КАК ВидДвижения,
+
+    ВЫБОР
+        КОГДА Наличные.ВидДвижения = ЗНАЧЕНИЕ(ВидДвиженияНакопления.Приход)
+            ТОГДА Наличные.Сумма
+        ИНАЧЕ 0
+    КОНЕЦ КАК Приход,
+
+    ВЫБОР
+        КОГДА Наличные.ВидДвижения = ЗНАЧЕНИЕ(ВидДвиженияНакопления.Расход)
+            ТОГДА Наличные.Сумма
+        ИНАЧЕ 0
+    КОНЕЦ КАК Расход,
+
+    ВЫБОР
+        КОГДА Наличные.ВидДвижения = ЗНАЧЕНИЕ(ВидДвиженияНакопления.Приход)
+            ТОГДА Наличные.Сумма
+        ИНАЧЕ -Наличные.Сумма
+    КОНЕЦ КАК ИзменениеОстатка
+
+ИЗ
+    РегистрНакопления.ОстаткиНаличных КАК Наличные
+
+ГДЕ
+    Наличные.Активность
+
+ОБЪЕДИНИТЬ ВСЕ
+
+ВЫБРАТЬ
+    НАЧАЛОПЕРИОДА(Безналичные.Период, ДЕНЬ) КАК ДатаОтбора,
+    Безналичные.Период КАК Дата,
+    Безналичные.Регистратор КАК Документ,
+    Безналичные.Регистратор.СпособОплаты КАК СпособОплатыОтбор,
+    ПРЕДСТАВЛЕНИЕ(Безналичные.Регистратор.СпособОплаты) КАК ВидСредств,
+    ПРЕДСТАВЛЕНИЕ(Безналичные.БанковскийСчет) КАК МестоХранения,
+    Безналичные.ВидДвижения КАК ВидДвижения,
+
+    ВЫБОР
+        КОГДА Безналичные.ВидДвижения = ЗНАЧЕНИЕ(ВидДвиженияНакопления.Приход)
+            ТОГДА Безналичные.Сумма
+        ИНАЧЕ 0
+    КОНЕЦ КАК Приход,
+
+    ВЫБОР
+        КОГДА Безналичные.ВидДвижения = ЗНАЧЕНИЕ(ВидДвиженияНакопления.Расход)
+            ТОГДА Безналичные.Сумма
+        ИНАЧЕ 0
+    КОНЕЦ КАК Расход,
+
+    ВЫБОР
+        КОГДА Безналичные.ВидДвижения = ЗНАЧЕНИЕ(ВидДвиженияНакопления.Приход)
+            ТОГДА Безналичные.Сумма
+        ИНАЧЕ -Безналичные.Сумма
+    КОНЕЦ КАК ИзменениеОстатка
+
+ИЗ
+    РегистрНакопления.ОстаткиБезналичных КАК Безналичные
+
+ГДЕ
+    Безналичные.Активность</query>
+	</dataSet>
+	<totalField>
+		<dataPath>Приход</dataPath>
+		<expression>Сумма(Приход)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Расход</dataPath>
+		<expression>Сумма(Расход)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ИзменениеОстатка</dataPath>
+		<expression>Сумма(ИзменениеОстатка)</expression>
+	</totalField>
+	<settingsVariant>
+		<dcsset:name>Основной</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Основной</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Дата</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>МестоХранения</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>СпособОплатыОтбор</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Приход</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Расход</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>ИзменениеОстатка</dcsset:field>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:filter>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">ДатаОтбора</dcsset:left>
+					<dcsset:comparisonType>GreaterOrEqual</dcsset:comparisonType>
+					<dcsset:right xsi:type="v8:StandardBeginningDate">
+						<v8:variant xsi:type="v8:StandardBeginningDateVariant">Custom</v8:variant>
+						<v8:date>0001-01-01T00:00:00</v8:date>
+					</dcsset:right>
+					<dcsset:userSettingID>9d0e7b35-b274-4aea-89d4-bb7693a4ad41</dcsset:userSettingID>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">ДатаОтбора</dcsset:left>
+					<dcsset:comparisonType>LessOrEqual</dcsset:comparisonType>
+					<dcsset:right xsi:type="v8:StandardBeginningDate">
+						<v8:variant xsi:type="v8:StandardBeginningDateVariant">Custom</v8:variant>
+						<v8:date>0001-01-01T00:00:00</v8:date>
+					</dcsset:right>
+					<dcsset:userSettingID>d6663502-f612-4826-ba75-8294d9f598db</dcsset:userSettingID>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">МестоХранения</dcsset:left>
+					<dcsset:comparisonType>Contains</dcsset:comparisonType>
+					<dcsset:right xsi:type="xs:string"/>
+					<dcsset:userSettingID>8c7d14fc-68f8-496f-8b78-b00bd9e92b0b</dcsset:userSettingID>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">СпособОплатыОтбор</dcsset:left>
+					<dcsset:comparisonType>Equal</dcsset:comparisonType>
+					<dcsset:userSettingID>ea5c0d0f-00c1-43ce-a1e5-9bcf78bc0db5</dcsset:userSettingID>
+				</dcsset:item>
+			</dcsset:filter>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:order>
+					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+				</dcsset:order>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>
