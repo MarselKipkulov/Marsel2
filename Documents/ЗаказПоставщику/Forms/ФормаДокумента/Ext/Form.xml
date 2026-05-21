@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.12">
+	<AutoTime>CurrentOrLast</AutoTime>
+	<UsePostingMode>Auto</UsePostingMode>
+	<RepostOnWrite>true</RepostOnWrite>
+	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1"/>
+	<Events>
+		<Event name="OnOpen">ПриОткрытии</Event>
+		<Event name="OnCreateAtServer">ПриСозданииНаСервере</Event>
+	</Events>
+	<ChildItems>
+		<InputField name="Номер" id="1">
+			<DataPath>Объект.Number</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="НомерКонтекстноеМеню" id="2"/>
+			<ExtendedTooltip name="НомерРасширеннаяПодсказка" id="3"/>
+		</InputField>
+		<InputField name="Дата" id="4">
+			<DataPath>Объект.Date</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="ДатаКонтекстноеМеню" id="5"/>
+			<ExtendedTooltip name="ДатаРасширеннаяПодсказка" id="6"/>
+		</InputField>
+		<InputField name="Поставщик" id="7">
+			<DataPath>Объект.Поставщик</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="ПоставщикКонтекстноеМеню" id="8"/>
+			<ExtendedTooltip name="ПоставщикРасширеннаяПодсказка" id="9"/>
+		</InputField>
+		<InputField name="ОжидаемаяДатаПоставки" id="10">
+			<DataPath>Объект.ОжидаемаяДатаПоставки</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="ОжидаемаяДатаПоставкиКонтекстноеМеню" id="11"/>
+			<ExtendedTooltip name="ОжидаемаяДатаПоставкиРасширеннаяПодсказка" id="12"/>
+		</InputField>
+		<InputField name="Сотрудник" id="13">
+			<DataPath>Объект.Сотрудник</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="СотрудникКонтекстноеМеню" id="14"/>
+			<ExtendedTooltip name="СотрудникРасширеннаяПодсказка" id="15"/>
+		</InputField>
+		<InputField name="Статус" id="16">
+			<DataPath>Объект.Статус</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="СтатусКонтекстноеМеню" id="17"/>
+			<ExtendedTooltip name="СтатусРасширеннаяПодсказка" id="18"/>
+		</InputField>
+		<InputField name="СпособОплаты" id="19">
+			<DataPath>Объект.СпособОплаты</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="СпособОплатыКонтекстноеМеню" id="20"/>
+			<ExtendedTooltip name="СпособОплатыРасширеннаяПодсказка" id="21"/>
+			<Events>
+				<Event name="OnChange">СпособОплатыПриИзменении</Event>
+			</Events>
+		</InputField>
+		<InputField name="Касса" id="22">
+			<DataPath>Объект.Касса</DataPath>
+			<Visible>false</Visible>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="КассаКонтекстноеМеню" id="23"/>
+			<ExtendedTooltip name="КассаРасширеннаяПодсказка" id="24"/>
+		</InputField>
+		<InputField name="БанковскийСчет" id="25">
+			<DataPath>Объект.БанковскийСчет</DataPath>
+			<Visible>false</Visible>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="БанковскийСчетКонтекстноеМеню" id="26"/>
+			<ExtendedTooltip name="БанковскийСчетРасширеннаяПодсказка" id="27"/>
+		</InputField>
+		<InputField name="ОбщаяСумма" id="28">
+			<DataPath>Объект.ОбщаяСумма</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="ОбщаяСуммаКонтекстноеМеню" id="29"/>
+			<ExtendedTooltip name="ОбщаяСуммаРасширеннаяПодсказка" id="30"/>
+		</InputField>
+		<InputField name="Примечание" id="31">
+			<DataPath>Объект.Примечание</DataPath>
+			<EditMode>EnterOnInput</EditMode>
+			<ContextMenu name="ПримечаниеКонтекстноеМеню" id="32"/>
+			<ExtendedTooltip name="ПримечаниеРасширеннаяПодсказка" id="33"/>
+		</InputField>
+		<Table name="Материалы" id="34">
+			<Representation>List</Representation>
+			<AutoInsertNewRow>true</AutoInsertNewRow>
+			<EnableStartDrag>true</EnableStartDrag>
+			<EnableDrag>true</EnableDrag>
+			<DataPath>Объект.Материалы</DataPath>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="МатериалыКонтекстноеМеню" id="35"/>
+			<AutoCommandBar name="МатериалыКоманднаяПанель" id="36"/>
+			<ExtendedTooltip name="МатериалыРасширеннаяПодсказка" id="37"/>
+			<SearchStringAddition name="МатериалыСтрокаПоиска" id="38">
+				<AdditionSource>
+					<Item>Материалы</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="МатериалыСтрокаПоискаКонтекстноеМеню" id="39"/>
+				<ExtendedTooltip name="МатериалыСтрокаПоискаРасширеннаяПодсказка" id="40"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="МатериалыСостояниеПросмотра" id="41">
+				<AdditionSource>
+					<Item>Материалы</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="МатериалыСостояниеПросмотраКонтекстноеМеню" id="42"/>
+				<ExtendedTooltip name="МатериалыСостояниеПросмотраРасширеннаяПодсказка" id="43"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="МатериалыУправлениеПоиском" id="44">
+				<AdditionSource>
+					<Item>Материалы</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="МатериалыУправлениеПоискомКонтекстноеМеню" id="45"/>
+				<ExtendedTooltip name="МатериалыУправлениеПоискомРасширеннаяПодсказка" id="46"/>
+			</SearchControlAddition>
+			<ChildItems>
+				<LabelField name="МатериалыНомерСтроки" id="47">
+					<DataPath>Объект.Материалы.LineNumber</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<ContextMenu name="МатериалыНомерСтрокиКонтекстноеМеню" id="48"/>
+					<ExtendedTooltip name="МатериалыНомерСтрокиРасширеннаяПодсказка" id="49"/>
+				</LabelField>
+				<InputField name="МатериалыМатериал" id="50">
+					<DataPath>Объект.Материалы.Материал</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<ContextMenu name="МатериалыМатериалКонтекстноеМеню" id="51"/>
+					<ExtendedTooltip name="МатериалыМатериалРасширеннаяПодсказка" id="52"/>
+					<Events>
+						<Event name="OnChange">МатериалыМатериалПриИзменении</Event>
+					</Events>
+				</InputField>
+				<InputField name="МатериалыКоличество" id="53">
+					<DataPath>Объект.Материалы.Количество</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<ContextMenu name="МатериалыКоличествоКонтекстноеМеню" id="54"/>
+					<ExtendedTooltip name="МатериалыКоличествоРасширеннаяПодсказка" id="55"/>
+					<Events>
+						<Event name="OnChange">МатериалыКоличествоПриИзменении</Event>
+					</Events>
+				</InputField>
+				<InputField name="МатериалыЦенаДоговора" id="56">
+					<DataPath>Объект.Материалы.ЦенаДоговора</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<ContextMenu name="МатериалыЦенаДоговораКонтекстноеМеню" id="57"/>
+					<ExtendedTooltip name="МатериалыЦенаДоговораРасширеннаяПодсказка" id="58"/>
+					<Events>
+						<Event name="OnChange">МатериалыЦенаДоговораПриИзменении</Event>
+					</Events>
+				</InputField>
+				<InputField name="МатериалыСтоимость" id="59">
+					<DataPath>Объект.Материалы.Стоимость</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<ContextMenu name="МатериалыСтоимостьКонтекстноеМеню" id="60"/>
+					<ExtendedTooltip name="МатериалыСтоимостьРасширеннаяПодсказка" id="61"/>
+				</InputField>
+				<InputField name="МатериалыВидЦены" id="62">
+					<DataPath>Объект.Материалы.ВидЦены</DataPath>
+					<EditMode>EnterOnInput</EditMode>
+					<ContextMenu name="МатериалыВидЦеныКонтекстноеМеню" id="63"/>
+					<ExtendedTooltip name="МатериалыВидЦеныРасширеннаяПодсказка" id="64"/>
+					<Events>
+						<Event name="OnChange">МатериалыВидЦеныПриИзменении</Event>
+					</Events>
+				</InputField>
+			</ChildItems>
+		</Table>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Объект" id="1">
+			<Type>
+				<v8:Type>cfg:DocumentObject.ЗаказПоставщику</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+			<SavedData>true</SavedData>
+			<UseAlways>
+				<Field>Объект.RegisterRecords</Field>
+			</UseAlways>
+		</Attribute>
+	</Attributes>
+</Form>
